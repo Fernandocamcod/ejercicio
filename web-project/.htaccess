@@ -1,0 +1,18 @@
+# Archivo: /web-project/web-project/.htaccess
+
+Options -Indexes
+RewriteEngine On
+
+# Redirigir a HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Proteger archivos sensibles
+<FilesMatch "\.(php|sql|ini)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Reescritura de URLs amigables
+RewriteRule ^login$ public/login.html [L]
+RewriteRule ^register$ public/register.html [L]
