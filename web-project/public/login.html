@@ -5,23 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <title>Iniciar Sesión</title>
+    <style>
+        body {
+            background: url('https://img.freepik.com/foto-gratis/blur-cafe-cafeteria-restaurante-bokeh-fondo_1421-472.jpg?t=st=1738809615~exp=1738813215~hmac=1190cbc57c2fd8772ca005595819ad7f4f91fe301ea79d4ee732b7fcf5c608a4&w=996') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        .container {
+            width: 320px;
+            margin: 100px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background: #218838;
+        }
+        p {
+            margin-top: 15px;
+        }
+        p a {
+            color: #17a2b8;
+            text-decoration: none;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h2>Iniciar Sesión</h2>
-        <form id="loginForm" action="../src/php/login.php" method="POST">
+        <div id="errorMessage" class="error-message"></div>
+        
+        <form id="loginForm" action="php/login.php" method="POST">
             <div class="form-group">
                 <label for="username">Nombre de Usuario:</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" placeholder="Ingrese su usuario" autocomplete="username" required>
             </div>
             <div class="form-group">
                 <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" placeholder="Ingrese su contraseña" autocomplete="current-password" required>
             </div>
             <button type="submit">Iniciar Sesión</button>
             <p>No tienes una cuenta? <a href="register.html">Regístrate aquí</a></p>
         </form>
     </div>
+
     <script src="js/scripts.js"></script>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            let username = document.getElementById("username").value.trim();
+            let password = document.getElementById("password").value.trim();
+            let errorMessage = document.getElementById("errorMessage");
+
+            if (username === "" || password === "") {
+                event.preventDefault();
+                errorMessage.textContent = "❌ Todos los campos son obligatorios.";
+            }
+        });
+    </script>
 </body>
 </html>
